@@ -5,7 +5,7 @@ from .models import PR, Repository
 
 # Create your views here.
 def validator_index(request):
-    return HttpResponse("Validator is UP.")
+    return render(request, 'welcome.html')
 
 
 def pr_details(request, id):
