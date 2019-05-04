@@ -9,35 +9,30 @@ def validator_index(request):
 
 
 def pr_details(request, id):
-    details = PR.objects.get(pk=id);
-    return HttpResponse("Pr name: " + details.name + "<br>" +
-                        "Status: " + details.status + "<br>" +
-                        "Created by: " + str(details.created) + "<br>" +
-                        "Owner: " + str(details.owner) + "<br>" +
-                        "Description: " + details.description + "<br>" +
-                        "Already merged: " + str(details.merged) + "<br>")
+    details = PR.objects.get(pk=id)
+    return render(request, 'validator/pr_details.html')
+    # return HttpResponse("Pr name: " + details.name + "<br>" +
+    #                    "Status: " + details.status + "<br>" +
+    #                    "Created by: " + str(details.created) + "<br>" +
+    #                    "Owner: " + str(details.owner) + "<br>" +
+    #                    "Description: " + details.description + "<br>" +
+    #                    "Already merged: " + str(details.merged) + "<br>")
 
 
 def repo_details(request, id):
-    details = Repository.objects.get(pk=id);
-    return HttpResponse("Pr name: " + details.name + "<br>" +
-                        "Status: " + details.status + "<br>" +
-                        "Created by: " + str(details.created) + "<br>" +
-                        "Owner: " + str(details.owner) + "<br>" +
-                        "Description: " + details.description + "<br>")
+    details = Repository.objects.get(pk=id)
+    return render(request, 'validator/repo_details.html')
 
 
 def all_prs(request):
-    allprs = PR.objects.all()
-    prlist = ''
-    for pr in allprs:
-        prlist += pr.name + "<br>"
-    return HttpResponse("All PR details: <br>" + prlist)
+    myprs = PR.objects.current_user_prs(request.user)
+    return render(request, 'validator/prs.html',
+                  {'nprs': PR.objects.count(),
+                   'allprs': myprs})
 
 
 def all_repos(request):
-    allrepos = Repository.objects.all()
-    repolist = ''
-    for repo in allrepos:
-        repolist += repo.name + "<br>"
-    return HttpResponse("All PR details: <br>" + repolist)
+    myrepos = Repository.objects.current_user_repos(request.user)
+    return render(request, 'validator/repos.html',
+                  {'nrepos': Repository.objects.count(),
+                   'allrepos': myrepos})

@@ -1,0 +1,14 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+<h1>All pull requests list:</h1>
+<div>Hi there are currently {{ nprs }} PR's in the database.</div>
+<hr>
+<div>And here are {{  user.username }} pull requests:</div>
+<ul>
+    {% for p in allprs %}
+    <li>Repo: {{ p.id }}: Name: {{ p.name }} | Description: {{ p.description }} | Merged: {{ p.merged }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
