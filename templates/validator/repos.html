@@ -1,13 +1,45 @@
 {%  extends "../base.html" %}
 
 {% block content %}
-<h1>All repository list:</h1>
-<div>Hi there are currenty {{ nrepos }} repositories in the database.</div>
-<hr>
-<div>And here are {{  user.username }} repos:</div>
-<ul>
-    {% for r in allrepos %}
-    <li>Repo: {{ r.id }}: Name: {{ r.name }} | Description {{ r.description }} | Status: {{ r.status }}</li>
-    {% endfor %}
-</ul>
+    <h1>All repository list:</h1>
+    <div>Hi there are currenty {{ nrepos }} repositories in the database.</div>
+    <hr>
+
+<div>And here are {{  user.username }} repos (click on ID to see details):</div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in allrepos %}
+            <tr data-href="{{ r.id }}">
+                <td>{{ r.id }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.description }}</td>
+                <td>{{ r.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{%  endblock %}
+
+
+{% block additional_scripts %}
+<script>
+
+$(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('href');
+        return false;
+    });
+});
+
+</script>
 {%  endblock %}

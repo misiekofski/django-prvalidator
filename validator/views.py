@@ -15,19 +15,14 @@ def validator_index(request):
 @login_required
 def pr_details(request, id):
     details = PR.objects.get(pk=id)
-    return render(request, 'validator/pr_details.html')
-    # return HttpResponse("Pr name: " + details.name + "<br>" +
-    #                    "Status: " + details.status + "<br>" +
-    #                    "Created by: " + str(details.created) + "<br>" +
-    #                    "Owner: " + str(details.owner) + "<br>" +
-    #                    "Description: " + details.description + "<br>" +
-    #                    "Already merged: " + str(details.merged) + "<br>")
-
+    return render(request, 'validator/pr_details.html',
+                  {'details': details})
 
 @login_required
 def repo_details(request, id):
     details = Repository.objects.get(pk=id)
-    return render(request, 'validator/repo_details.html')
+    return render(request, 'validator/repo_details.html',
+                  {'details': details})
 
 
 @login_required
