@@ -113,4 +113,4 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL="repo_list"
 LOGOUT_REDIRECT_URL="index"
-LOGIN_URL="user_loginA"
+LOGIN_URL="user_login"
