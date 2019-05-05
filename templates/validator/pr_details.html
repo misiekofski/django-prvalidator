@@ -2,6 +2,34 @@
 
 {% block content %}
 
-<h1>PR details:</h1>
+<h1>Pull requests details:</h1>
+<table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Merged</th>
+            <th>Repo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ details.id }}</td>
+            <td>{{ details.name }}</td>
+            <td>{{ details.description }}</td>
+            <td>{{ details.owner }}</td>
+            <td>{{ details.status }}</td>
+            <td>{{ details.created }}</td>
+            <td>{{ details.merged }}</td>
+            <td>{{ details.repo.name }}</td>
+        </tr>
+        </tbody>
+</table>
+
+    <a href="{% url 'pr_list'  %}">Go back to pull requests list</a>
 
 {% endblock %}

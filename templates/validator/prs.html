@@ -6,9 +6,37 @@
 <div>Hi there are currently {{ nprs }} PR's in the database.</div>
 <hr>
 <div>And here are {{  user.username }} pull requests:</div>
-<ul>
-    {% for p in allprs %}
-    <li>Repo: {{ p.id }}: Name: {{ p.name }} | Description: {{ p.description }} | Merged: {{ p.merged }}</li>
-    {% endfor %}
-</ul>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in allprs %}
+            <tr data-href="{{ p.id }}">
+                <td>{{ p.id }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.description }}</td>
+                <td>{{ p.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}
+{% block additional_scripts %}
+<script>
+
+$(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('href');
+        return false;
+    });
+});
+
+</script>
+{%  endblock %}
