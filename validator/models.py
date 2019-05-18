@@ -13,7 +13,7 @@ ITEM_STATUSES = (
 class StoryQuerySet(models.QuerySet):
     def current_user_stories(self, user):
         return self.filter(
-            Q(owner=user)
+            Q(assigned_to=user)
         )
 
 
