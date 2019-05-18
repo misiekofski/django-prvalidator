@@ -11,14 +11,14 @@ ITEM_STATUSES = (
 )
 
 class StoryQuerySet(models.QuerySet):
-    def current_user_repos(self, user):
+    def current_user_stories(self, user):
         return self.filter(
             Q(owner=user)
         )
 
 
 class ProjectQuerySet(models.QuerySet):
-    def current_user_prs(self, user):
+    def current_user_projects(self, user):
         return self.filter(
             Q(owner=user)
         )

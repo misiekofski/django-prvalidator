@@ -26,7 +26,7 @@ def project_details(request, id):
 
 @login_required
 def all_stories(request):
-    my_stories = Story.objects.current_user_prs(request.user)
+    my_stories = Story.objects.current_user_stories(request.user)
     return render(request, 'validator/stories.html',
                   {'num_stories': Story.objects.count(),
                    'my_stories': my_stories})
@@ -34,7 +34,7 @@ def all_stories(request):
 
 @login_required
 def all_projects(request):
-    my_projects = Project.objects.current_user_repos(request.user)
+    my_projects = Project.objects.current_user_projects(request.user)
     return render(request, 'validator/projects.html',
                   {'num_projects': Project.objects.count(),
                    'my_projects': my_projects})
