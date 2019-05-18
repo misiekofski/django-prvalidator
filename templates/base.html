@@ -25,12 +25,12 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href={%  url 'index' %}>Repository handler v0.1</a>
+            <a class="navbar-brand" href={%  url 'index' %}>Mini Jira</a>
 
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="{%  url 'repo_list' %}">Repositories</a></li>
-            <li><a href="{%  url 'pr_list' %}">Pull requests</a></li>
+            <li><a href="{%  url 'project_list' %}">Projects</a></li>
+            <li><a href="{%  url 'stories_list' %}">Stories</a></li>
             {% if user.is_authenticated %}
             <li><a href="{%  url 'user_logout' %}">Logout</a></li>
             {%  else %}

@@ -2,26 +2,28 @@
 
 {% block content %}
     <h1>All repository list:</h1>
-    <div>Hi there are currenty {{ nrepos }} repositories in the database.</div>
+    <div>Hi there are currenty {{ num_projects }} projects in the database.</div>
     <hr>
 
-<div>And here are {{  user.username }} repos (click on table row to see details):</div>
+<div>And here are {{  user.username }} projects (click on table row to see details):</div>
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Owner</th>
             <th>Description</th>
             <th>Status</th>
         </tr>
         </thead>
         <tbody>
-        {% for r in allrepos %}
-            <tr data-href="{{ r.id }}">
-                <td>{{ r.id }}</td>
-                <td>{{ r.name }}</td>
-                <td>{{ r.description }}</td>
-                <td>{{ r.status }}</td>
+        {% for p in my_projects %}
+            <tr data-href="{{ p.id }}">
+                <td>{{ p.id }}</td>
+                <td>{{ p.owner }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.description }}</td>
+                <td>{{ p.status }}</td>
             </tr>
         {% endfor %}
         </tbody>

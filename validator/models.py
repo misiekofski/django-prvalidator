@@ -2,15 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-REPO_STATUSES = (
-    ('A', 'Active'),
-    ('D', 'Deleted'),
-    ('N', 'Not active'),
-    ('P', 'Production ready'),
-    ('T', 'Test')
-)
-
-PR_STATUSES = (
+ITEM_STATUSES = (
     ('A', 'Active'),
     ('D', 'Deleted'),
     ('N', 'Not active'),
@@ -18,14 +10,14 @@ PR_STATUSES = (
     ('T', 'Test')
 )
 
-class RepoQuerySet(models.QuerySet):
+class StoryQuerySet(models.QuerySet):
     def current_user_repos(self, user):
         return self.filter(
             Q(owner=user)
         )
 
 
-class PRQuerySet(models.QuerySet):
+class ProjectQuerySet(models.QuerySet):
     def current_user_prs(self, user):
         return self.filter(
             Q(owner=user)
@@ -33,25 +25,34 @@ class PRQuerySet(models.QuerySet):
 
 
 # Create your models here.
-class Repository(models.Model):
-    owner = models.ForeignKey(User, related_name="repo_owner", on_delete=models.PROTECT)
-    name = models.CharField(max_length=100, default="Unnamed Repository")
+class Project(models.Model):
+    owner = models.ForeignKey(User, related_name="project_owner", on_delete=models.PROTECT)
+    name = models.CharField(max_length=100, default="New Project")
     description = models.CharField(max_length=1000, null=True)
     created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=1, default='N', choices=REPO_STATUSES)
+    status = models.CharField(max_length=1, default='N', choices=ITEM_STATUSES)
 
-    objects = RepoQuerySet.as_manager()
+    objects = ProjectQuerySet.as_manager()
 
 
-class PR(models.Model):
-    owner = models.ForeignKey(User, related_name="pr_creator", on_delete=models.PROTECT)
+class Story(models.Model):
+    creator = models.ForeignKey(User, related_name="story_creator", on_delete=models.PROTECT)
+    assigned_to = models.ForeignKey(User, related_name="assigned_story_user", on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=100, default="New Story")
+    description = models.CharField(max_length=1000, null=True)
+    status = models.CharField(max_length=1, default='N', choices=ITEM_STATUSES)
+    project = models.ForeignKey(Project, related_name="project", on_delete=models.CASCADE)
+
+    objects = StoryQuerySet.as_manager()
+
+class Task(models.Model):
+    creator = models.ForeignKey(User, related_name="task_creator", on_delete=models.PROTECT)
+    created = models.DateTimeField(auto_now_add=True)
+    assigned_to = models.ForeignKey(User, related_name="assigned_task_user", on_delete=models.PROTECT)
     name = models.CharField(max_length=100, default="Unnamed PR")
     description = models.CharField(max_length=1000, null=True)
-    status = models.CharField(max_length=1, default='N', choices=PR_STATUSES)
-    merged = models.BooleanField()
-    repo = models.ForeignKey(Repository, related_name="repository", on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, default='N', choices=ITEM_STATUSES)
+    story = models.ForeignKey(Story, related_name="story", on_delete=models.CASCADE)
 
-    objects = PRQuerySet.as_manager()
-
-
+    objects = StoryQuerySet.as_manager()

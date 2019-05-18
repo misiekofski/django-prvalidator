@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<h1>All pull requests list:</h1>
-<div>Hi there are currently {{ nprs }} PR's in the database.</div>
+<h1>All stories list:</h1>
+<div>Hi there are currently {{ num_stories }} stories in the database.</div>
 <hr>
-<div>And here are {{  user.username }} pull requests:</div>
+<div>And here are {{  user.username }} stories:</div>
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -16,12 +16,12 @@
         </tr>
         </thead>
         <tbody>
-        {% for p in allprs %}
-            <tr data-href="{{ p.id }}">
-                <td>{{ p.id }}</td>
-                <td>{{ p.name }}</td>
-                <td>{{ p.description }}</td>
-                <td>{{ p.status }}</td>
+        {% for s in my_stories %}
+            <tr data-href="{{ s.id }}">
+                <td>{{ s.id }}</td>
+                <td>{{ s.name }}</td>
+                <td>{{ s.description }}</td>
+                <td>{{ s.status }}</td>
             </tr>
         {% endfor %}
         </tbody>

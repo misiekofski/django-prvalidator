@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block title %}
-Repositories tracker by Michal Dobrzycki
+Project tracker by Michal Dobrzycki
 {% endblock %}
 
 {% block content %}
     <div class="jumbrotron">
     <div class="container">
-        <h1>Repo tracker</h1>
-        <p>Track your repositories and PR's...</p>
-        <p>Log in to see data</p>
+        <h1>Project tracker</h1>
+        <p>Track your project and stories...</p>
+        <p>Please <a href="{%  url 'user_login' %}">log in</a> to see data</p>
     </div>
     </div>
 {% endblock %}

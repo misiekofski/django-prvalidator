@@ -1,41 +1,40 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .models import PR, Repository
+from .models import Project, Story, Task
 
 
 # Create your views here.
 def validator_index(request):
     if request.user.is_authenticated:
-        return redirect('repo_list')
+        return redirect('project_list')
     else:
         return render(request, 'welcome.html')
 
 
 @login_required
-def pr_details(request, id):
-    details = PR.objects.get(pk=id)
-    return render(request, 'validator/pr_details.html',
+def story_details(request, id):
+    details = Story.objects.get(pk=id)
+    return render(request, 'validator/story_details.html',
                   {'details': details})
 
 @login_required
-def repo_details(request, id):
-    details = Repository.objects.get(pk=id)
-    return render(request, 'validator/repo_details.html',
+def project_details(request, id):
+    details = Project.objects.get(pk=id)
+    return render(request, 'validator/project_details.html',
                   {'details': details})
 
 
 @login_required
-def all_prs(request):
-    myprs = PR.objects.current_user_prs(request.user)
-    return render(request, 'validator/prs.html',
-                  {'nprs': PR.objects.count(),
-                   'allprs': myprs})
+def all_stories(request):
+    my_stories = Story.objects.current_user_prs(request.user)
+    return render(request, 'validator/stories.html',
+                  {'num_stories': Story.objects.count(),
+                   'my_stories': my_stories})
 
 
 @login_required
-def all_repos(request):
-    myrepos = Repository.objects.current_user_repos(request.user)
-    return render(request, 'validator/repos.html',
-                  {'nrepos': Repository.objects.count(),
-                   'allrepos': myrepos})
+def all_projects(request):
+    my_projects = Project.objects.current_user_repos(request.user)
+    return render(request, 'validator/projects.html',
+                  {'num_projects': Project.objects.count(),
+                   'my_projects': my_projects})
