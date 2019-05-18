@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Pull requests details:</h1>
+<h1>Stories details:</h1>
 <table class="table table-hover">
         <thead>
         <tr>
@@ -12,8 +12,7 @@
             <th>Owner</th>
             <th>Status</th>
             <th>Created</th>
-            <th>Merged</th>
-            <th>Repo</th>
+            <th>Project</th>
         </tr>
         </thead>
         <tbody>
@@ -21,11 +20,10 @@
             <td>{{ details.id }}</td>
             <td>{{ details.name }}</td>
             <td>{{ details.description }}</td>
-            <td>{{ details.owner }}</td>
+            <td>{{ details.creator }}</td>
             <td>{{ details.status }}</td>
             <td>{{ details.created }}</td>
-            <td>{{ details.merged }}</td>
-            <td>{{ details.repo.name }}</td>
+            <td>{{ details.project.name }}</td>
         </tr>
         </tbody>
 </table>

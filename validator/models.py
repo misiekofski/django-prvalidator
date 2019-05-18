@@ -46,6 +46,7 @@ class Story(models.Model):
 
     objects = StoryQuerySet.as_manager()
 
+
 class Task(models.Model):
     creator = models.ForeignKey(User, related_name="task_creator", on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
