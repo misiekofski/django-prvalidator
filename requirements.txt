@@ -1,0 +1,5 @@
+Django==2.1.7
+django-allauth==0.38.0
+djangorestframework==3.9.1
+django-heroku
+gunicorn
