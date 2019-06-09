@@ -1,13 +1,19 @@
 {%  extends "../base.html" %}
 
 {% block content %}
+<div>
     <h1>All project list:</h1>
-    <div>Hi there are currenty {{ num_projects }} projects in the database.</div>
-    <hr>
+
+</div>
+<div>Hi there are currently {{ num_projects }} projects in the database.
+    <button type="button" class="btn btn-success">Add new project</button>
+</div>
+<br>
+<hr>
 
 <div>And here are {{  user.username }} projects (click on table row to see details):</div>
-    <table class="table table-hover">
-        <thead class="thead-dark">
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Name</th>
@@ -15,19 +21,19 @@
             <th>Description</th>
             <th>Status</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         {% for p in my_projects %}
-            <tr data-href="{{ p.id }}">
-                <td>{{ p.id }}</td>
-                <td>{{ p.owner }}</td>
-                <td>{{ p.name }}</td>
-                <td>{{ p.description }}</td>
-                <td>{{ p.status }}</td>
-            </tr>
+        <tr data-href="{{ p.id }}">
+            <td>{{ p.id }}</td>
+            <td>{{ p.owner }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.description }}</td>
+            <td>{{ p.status }}</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 
 {%  endblock %}
@@ -36,12 +42,14 @@
 {% block additional_scripts %}
 <script>
 
-$(document).ready(function(){
-    $('table tr').click(function(){
-        window.location = $(this).data('href');
-        return false;
+    $(document).ready(function () {
+        $('table tr').click(function () {
+            window.location = $(this).data('href');
+            return false;
+        });
     });
-});
+
+
 
 </script>
 {%  endblock %}

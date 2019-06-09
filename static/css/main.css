@@ -9,6 +9,10 @@ table tr[data-href] {
     cursor: pointer;
 }
 
+.btn-success {
+    float: right;
+}
+
 
 
 

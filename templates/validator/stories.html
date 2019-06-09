@@ -3,11 +3,14 @@
 {% block content %}
 
 <h1>All stories list:</h1>
-<div>Hi there are currently {{ num_stories }} stories in the database.</div>
+<div>Hi there are currently {{ num_stories }} stories in the database.
+    <button type="button" class="btn btn-success">Add new story</button>
+</div>
+<br>
 <hr>
 <div>And here are {{  user.username }} stories:</div>
-    <table class="table table-hover">
-        <thead class="thead-dark">
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Name</th>
@@ -15,30 +18,30 @@
             <th>Status</th>
             <th>Creator</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         {% for s in my_stories %}
-            <tr data-href="{{ s.id }}">
-                <td>{{ s.id }}</td>
-                <td>{{ s.name }}</td>
-                <td>{{ s.description }}</td>
-                <td>{{ s.status }}</td>
-                <td>{{  s.creator }}</td>
-            </tr>
+        <tr data-href="{{ s.id }}">
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.description }}</td>
+            <td>{{ s.status }}</td>
+            <td>{{  s.creator }}</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 {% endblock %}
 {% block additional_scripts %}
 <script>
 
-$(document).ready(function(){
-    $('table tr').click(function(){
-        window.location = $(this).data('href');
-        return false;
+    $(document).ready(function () {
+        $('table tr').click(function () {
+            window.location = $(this).data('href');
+            return false;
+        });
     });
-});
 
 </script>
 {%  endblock %}
