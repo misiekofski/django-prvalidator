@@ -13,6 +13,14 @@ table tr[data-href] {
     float: right;
 }
 
+.btn-primary {
+    float: left;
+}
+
+.modal-content {
+    background-color: lightgrey;
+}
+
 
 
 

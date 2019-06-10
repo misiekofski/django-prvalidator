@@ -6,7 +6,34 @@
 
 </div>
 <div>Hi there are currently {{ num_projects }} projects in the database.
-    <button type="button" class="btn btn-success">Add new project</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newProject">Add
+        new project</button>
+</div>
+<div class="container">
+    <div class="modal fade" id="newProject">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add new project</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/action_page.php">
+                        Name:<br>
+                        <input type="text" name="projectName" id="projName"><br>
+                        Description:<br>
+                        <textarea rows="3" cols="50" name="projectDescription" id="projDesc"></textarea><br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <form>
+                        <input type="submit" class="btn btn-primary" name="submitButton" id="buttonAddNewProject"
+                            value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <br>
 <hr>
@@ -16,8 +43,8 @@
     <thead class="thead-dark">
         <tr>
             <th>#</th>
-            <th>Name</th>
             <th>Owner</th>
+            <th>Name</th>
             <th>Description</th>
             <th>Status</th>
         </tr>
