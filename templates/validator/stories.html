@@ -3,11 +3,47 @@
 {% block content %}
 
 <h1>All stories list:</h1>
-<div>Hi there are currently {{ num_stories }} stories in the database.</div>
+<div>Hi there are currently {{ num_stories }} stories in the database.
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newStory">Add new story</button>
+</div>
+<div class="container">
+    <div class="modal fade" id="newStory">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add new story</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/stories" method="POST">
+                        Name:<br>
+                        <input type="text" name="storyName" id="storyName"><br>
+                        Description:<br>
+                        <textarea rows="2" cols="50" name="storyDescription" id="storyDescription"></textarea><br>
+                        Status:
+                        <select>
+                            <option value="Active">Active</option>
+                            <option value="Not active" selected>Not active</option>
+                            <option value="Deleted">Deleted</option>
+                            <option value="Merged to master">Merged to master</option>
+                            <option value="Test">Test</option><br>
+                        </select><br><br>
+                        <input type="submit" class="btn btn-primary" name="buttonAddNewStory" id="buttonAddNewStory"
+                            value="Submit">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
 <hr>
 <div>And here are {{  user.username }} stories:</div>
-    <table class="table table-hover">
-        <thead class="thead-dark">
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Name</th>
@@ -15,30 +51,30 @@
             <th>Status</th>
             <th>Creator</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         {% for s in my_stories %}
-            <tr data-href="{{ s.id }}">
-                <td>{{ s.id }}</td>
-                <td>{{ s.name }}</td>
-                <td>{{ s.description }}</td>
-                <td>{{ s.status }}</td>
-                <td>{{  s.creator }}</td>
-            </tr>
+        <tr data-href="{{ s.id }}">
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.description }}</td>
+            <td>{{ s.status }}</td>
+            <td>{{  s.creator }}</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 {% endblock %}
 {% block additional_scripts %}
 <script>
 
-$(document).ready(function(){
-    $('table tr').click(function(){
-        window.location = $(this).data('href');
-        return false;
+    $(document).ready(function () {
+        $('table tr').click(function () {
+            window.location = $(this).data('href');
+            return false;
+        });
     });
-});
 
 </script>
 {%  endblock %}

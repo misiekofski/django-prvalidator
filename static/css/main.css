@@ -9,6 +9,14 @@ table tr[data-href] {
     cursor: pointer;
 }
 
+.btn-success {
+    float: left;
+}
+
+.modal-content {
+    background-color: lightgrey;
+}
+
 
 
 

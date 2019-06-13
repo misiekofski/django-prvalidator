@@ -1,33 +1,73 @@
 {%  extends "../base.html" %}
 
 {% block content %}
+<div>
     <h1>All project list:</h1>
-    <div>Hi there are currenty {{ num_projects }} projects in the database.</div>
-    <hr>
+
+</div>
+<div>Hi there are currently {{ num_projects }} projects in the database.
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newProject">Add
+        new project</button>
+</div>
+<div class="container">
+    <div class="modal fade" id="newProject">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add new project</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/projects" method="POST">
+                        Name:<br>
+                        <input type="text" name="projectName" id="projectName"><br>
+                        Description:<br>
+                        <textarea rows="3" cols="50" name="projectDescription" id="projectDescription"></textarea><br>
+                        Status:
+                        <select>
+                            <option value="Active">Active</option>
+                            <option value="Not active" selected>Not active</option>
+                            <option value="Deleted">Deleted</option>
+                            <option value="Merged to master">Merged to master</option>
+                            <option value="Test">Test</option>
+                        </select><br><br>
+                        <input type="submit" class="btn btn-primary" name="buttonAddNewProject" id="buttonAddNewProject"
+                            value="Submit">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<hr>
 
 <div>And here are {{  user.username }} projects (click on table row to see details):</div>
-    <table class="table table-hover">
-        <thead class="thead-dark">
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>#</th>
-            <th>Name</th>
             <th>Owner</th>
+            <th>Name</th>
             <th>Description</th>
             <th>Status</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         {% for p in my_projects %}
-            <tr data-href="{{ p.id }}">
-                <td>{{ p.id }}</td>
-                <td>{{ p.owner }}</td>
-                <td>{{ p.name }}</td>
-                <td>{{ p.description }}</td>
-                <td>{{ p.status }}</td>
-            </tr>
+        <tr data-href="{{ p.id }}">
+            <td>{{ p.id }}</td>
+            <td>{{ p.owner }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.description }}</td>
+            <td>{{ p.status }}</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 
 {%  endblock %}
@@ -36,12 +76,14 @@
 {% block additional_scripts %}
 <script>
 
-$(document).ready(function(){
-    $('table tr').click(function(){
-        window.location = $(this).data('href');
-        return false;
+    $(document).ready(function () {
+        $('table tr').click(function () {
+            window.location = $(this).data('href');
+            return false;
+        });
     });
-});
+
+
 
 </script>
 {%  endblock %}
