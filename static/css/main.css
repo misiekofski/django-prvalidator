@@ -10,11 +10,11 @@ table tr[data-href] {
 }
 
 .btn-success {
-    float: left;
+    float: right;
 }
 
 .modal-content {
-    background-color: lightgrey;
+    background-color: white;
 }
 
 
