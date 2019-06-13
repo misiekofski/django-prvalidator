@@ -10,10 +10,6 @@ table tr[data-href] {
 }
 
 .btn-success {
-    float: right;
-}
-
-.btn-primary {
     float: left;
 }
 

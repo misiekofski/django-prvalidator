@@ -18,18 +18,25 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/action_page.php">
+                    <form action="/projects" method="POST">
                         Name:<br>
-                        <input type="text" name="projectName" id="projName"><br>
+                        <input type="text" name="projectName" id="projectName"><br>
                         Description:<br>
-                        <textarea rows="3" cols="50" name="projectDescription" id="projDesc"></textarea><br>
+                        <textarea rows="3" cols="50" name="projectDescription" id="projectDescription"></textarea><br>
+                        Status:
+                        <select>
+                            <option value="Active">Active</option>
+                            <option value="Not active" selected>Not active</option>
+                            <option value="Deleted">Deleted</option>
+                            <option value="Merged to master">Merged to master</option>
+                            <option value="Test">Test</option>
+                        </select><br><br>
+                        <input type="submit" class="btn btn-primary" name="buttonAddNewProject" id="buttonAddNewProject"
+                            value="Submit">
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <form>
-                        <input type="submit" class="btn btn-primary" name="submitButton" id="buttonAddNewProject"
-                            value="Submit">
-                    </form>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
