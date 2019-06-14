@@ -23,6 +23,12 @@ class ProjectQuerySet(models.QuerySet):
             Q(owner=user)
         )
 
+class TaskQuerySet(models.QuerySet):
+    def current_user_tasks(self, user):
+        return self.filter(
+            Q(assigned_to=user)
+        )
+
 
 # Create your models here.
 class Project(models.Model):
@@ -56,4 +62,4 @@ class Task(models.Model):
     status = models.CharField(max_length=1, default='N', choices=ITEM_STATUSES)
     story = models.ForeignKey(Story, related_name="story", on_delete=models.CASCADE)
 
-    objects = StoryQuerySet.as_manager()
+    objects = TaskQuerySet.as_manager()

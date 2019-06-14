@@ -1,1 +1,1 @@
-web: gunicorn prvalidator.wsgi --log-file -
+web: gunicorn minijira.wsgi --log-file -
