@@ -40,6 +40,9 @@ class Project(models.Model):
 
     objects = ProjectQuerySet.as_manager()
 
+    def __str__(self):
+        return "Id: " + str(self.id) + " Name: "+ self.name
+
 
 class Story(models.Model):
     creator = models.ForeignKey(User, related_name="story_creator", on_delete=models.PROTECT)
@@ -52,6 +55,9 @@ class Story(models.Model):
 
     objects = StoryQuerySet.as_manager()
 
+    def __str__(self):
+        return "Id: " + str(self.id) + " Name: "+ self.name
+
 
 class Task(models.Model):
     creator = models.ForeignKey(User, related_name="task_creator", on_delete=models.PROTECT)
@@ -63,3 +69,7 @@ class Task(models.Model):
     story = models.ForeignKey(Story, related_name="story", on_delete=models.CASCADE)
 
     objects = TaskQuerySet.as_manager()
+
+    def __str__(self):
+        return "Id: " + str(self.id) + " Name: "+ self.name
+

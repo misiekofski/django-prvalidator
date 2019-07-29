@@ -24,8 +24,30 @@
             <td>{{ details.created }}</td>
         </tr>
         </tbody>
-</table>
+    </table>
+    <hr>
 
-    <a href="{% url 'project_list'  %}">Go back to repo list</a>
+    <h2>Stories assigned to current project:</h2>
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>Story name</th>
+            <th>Description</th>
+            <th>Status</th>
+        </thead>
+
+        <tbody>
+                {%  for s in stories %}
+                <tr>
+                    <td>{{ s.id }}</td>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.description }}</td>
+                    <td>{{ s.status }}</td>
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'project_list'  %}">Go back to project list</a>
 
 {% endblock %}

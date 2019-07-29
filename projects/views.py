@@ -14,14 +14,18 @@ def validator_index(request):
 @login_required
 def story_details(request, id):
     details = Story.objects.get(pk=id)
+    tasks = Task.objects.filter(story=id)
     return render(request, 'projects/story_details.html',
-                  {'details': details})
+                  {'details': details,
+                   'tasks': tasks})
 
 @login_required
 def project_details(request, id):
     details = Project.objects.get(pk=id)
+    stories = Story.objects.filter(project=id)
     return render(request, 'projects/project_details.html',
-                  {'details': details})
+                  {'details': details,
+                   'stories': stories})
 
 
 @login_required
