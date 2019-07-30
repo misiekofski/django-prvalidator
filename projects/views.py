@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 
 from projects.forms import ProjectForm, StoryForm, TaskForm
@@ -62,3 +64,16 @@ class TasksView(LoginRequiredMixin, View):
                       {'num_tasks': Task.objects.count(),
                        'my_tasks': my_tasks,
                        'form': form})
+
+    def post(self, request):
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            creator = form.cleaned_data['creator']
+            assigned_to = form.cleaned_data['assigned_to']
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+            story = form.cleaned_data['story']
+            Task.objects.create(creator=creator, assigned_to=assigned_to, name=name, description=description, status=status, story=story)
+            return HttpResponseRedirect(reverse('task_list'))
+
