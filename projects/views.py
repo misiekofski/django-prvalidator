@@ -1,9 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
+from django.views.generic import FormView, CreateView
 
 from projects.forms import ProjectForm, StoryForm, TaskForm
 from .models import Project, Story, Task
@@ -45,6 +45,18 @@ class StoriesView(LoginRequiredMixin, View):
                        'my_stories': my_stories,
                        'form': form})
 
+    def post(self, request):
+        form = StoryForm(request.POST)
+        if form.is_valid():
+            creator = form.cleaned_data['creator']
+            assigned_to = form.cleaned_data['assigned_to']
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+            project = form.cleaned_data['project']
+            Story.objects.create(creator=creator, assigned_to=assigned_to, name=name, description=description, status=status, project=project)
+            return HttpResponseRedirect(reverse('stories_list'))
+
 
 class ProjectsView(LoginRequiredMixin, View):
     def get(self, request):
@@ -54,6 +66,16 @@ class ProjectsView(LoginRequiredMixin, View):
                       {'num_projects': Project.objects.count(),
                        'my_projects': my_projects,
                        'form': form})
+
+    def post(self, request):
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            owner = form.cleaned_data['owner']
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+            Project.objects.create(owner=owner, name=name, description=description, status=status)
+            return HttpResponseRedirect(reverse('project_list'))
 
 
 class TasksView(LoginRequiredMixin, View):
@@ -76,4 +98,3 @@ class TasksView(LoginRequiredMixin, View):
             story = form.cleaned_data['story']
             Task.objects.create(creator=creator, assigned_to=assigned_to, name=name, description=description, status=status, story=story)
             return HttpResponseRedirect(reverse('task_list'))
-
