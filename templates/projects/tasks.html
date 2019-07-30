@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<h1>All stories list:</h1>
-<div>Hi there are currently {{ num_tasks }} stories in the database.
+<h1>All task list:</h1>
+<div>Hi there are currently {{ num_tasks }} tasks in the database.
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newStory">Add new task</button>
 </div>
 <div class="container">
@@ -16,18 +16,8 @@
                 </div>
                 <div class="modal-body">
                     <form action="/tasks" method="POST">
-                        Name:<br>
-                        <input type="text" name="storyName" id="storyName"><br>
-                        Description:<br>
-                        <textarea rows="2" cols="50" name="storyDescription" id="storyDescription"></textarea><br>
-                        Status:
-                        <select>
-                            <option value="Active">Active</option>
-                            <option value="Not active" selected>Not active</option>
-                            <option value="Deleted">Deleted</option>
-                            <option value="Merged to master">Merged to master</option>
-                            <option value="Test">Test</option><br>
-                        </select><br><br>
+                        {% csrf_token %}
+                        {{ form.as_p }}
                         <input type="submit" class="btn btn-primary" name="buttonAddNewStory" id="buttonAddNewStory"
                             value="Submit">
                     </form>

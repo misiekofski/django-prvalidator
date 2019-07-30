@@ -19,18 +19,8 @@
                 </div>
                 <div class="modal-body">
                     <form action="/projects" method="POST">
-                        Name:<br>
-                        <input type="text" name="projectName" id="projectName"><br>
-                        Description:<br>
-                        <textarea rows="3" cols="50" name="projectDescription" id="projectDescription"></textarea><br>
-                        Status:
-                        <select>
-                            <option value="Active">Active</option>
-                            <option value="Not active" selected>Not active</option>
-                            <option value="Deleted">Deleted</option>
-                            <option value="Merged to master">Merged to master</option>
-                            <option value="Test">Test</option>
-                        </select><br><br>
+                        {% csrf_token %}
+                        {{ form.as_p }}
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <input type="submit" class="btn btn-primary" name="buttonAddNewProject" id="buttonAddNewProject"
